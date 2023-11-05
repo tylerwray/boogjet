@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+    provider     = "mysql"
+    url          = env("DATABASE_URL")
+    relationMode = "prisma"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Budget {
+    id             Int             @id @default(autoincrement())
+    name           String
+    userId         String
+    createdAt      DateTime        @default(now())
+    updatedAt      DateTime        @updatedAt
+    accounts       Account[]
+    categoryGroups CategoryGroup[]
+
+    @@index([name])
+}
+
+model Account {
+    id           Int           @id @default(autoincrement())
+    name         String
+    transactions Transaction[]
+    budget       Budget        @relation(fields: [budgetId], references: [id])
+    budgetId     Int
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+
+    @@index([name])
+    @@index([budgetId])
+}
+
+enum TransactionType {
+    OUTFLOW
+    INFLOW
+}
+
+model Transaction {
+    id         Int             @id @default(autoincrement())
+    name       String
+    account    Account         @relation(fields: [accountId], references: [id])
+    accountId  Int
+    payee      String
+    amount     Int
+    type       TransactionType
+    note       String
+    cleared    Boolean
+    category   Category        @relation(fields: [categoryId], references: [id])
+    categoryId Int
+    createdAt  DateTime        @default(now())
+    updatedAt  DateTime        @updatedAt
+
+    @@index([name])
+    @@index([accountId])
+    @@index([categoryId])
+}
+
+model CategoryGroup {
+    id         Int        @id @default(autoincrement())
+    name       String
+    createdAt  DateTime   @default(now())
+    updatedAt  DateTime   @updatedAt
+    categories Category[]
+    budget     Budget     @relation(fields: [budgetId], references: [id])
+    budgetId   Int
+
+    @@index([name])
+    @@index([budgetId])
+}
+
+model Category {
+    id              Int            @id @default(autoincrement())
+    name            String
+    categoryGroup   CategoryGroup  @relation(fields: [categoryGroupId], references: [id])
+    categoryGroupId Int
+    createdAt       DateTime       @default(now())
+    updatedAt       DateTime       @updatedAt
+    categoryFunds   CategoryFund[]
+    transactions    Transaction[]
+
+    @@index([name])
+    @@index([categoryGroupId])
+}
+
+model CategoryFund {
+    id         Int      @id @default(autoincrement())
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
+    amount     Int      @default(0)
+    month      Int
+    year       Int
+    createdAt  DateTime @default(now())
+    updatedAt  DateTime @updatedAt
+
+    @@index([month, year])
+    @@index([categoryId])
+}
