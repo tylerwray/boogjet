@@ -1,5 +1,5 @@
-import { SignOutButton, currentUser } from "@clerk/nextjs";
-import { listUserBudgets } from "~/data/budget";
+import { currentUser } from "@clerk/nextjs";
+import { listBudgets } from "~/data/budgets";
 
 export default async function Home() {
   const user = await currentUser();
@@ -7,17 +7,14 @@ export default async function Home() {
   if (!user) return null;
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-black text-white">
-      <SignOutButton>
-        <button>Sign out</button>
-      </SignOutButton>
+    <main className="flex min-h-screen flex-col items-center justify-center dark:bg-zinc-900 dark:text-white">
       <Budgets />
     </main>
   );
 }
 
 async function Budgets() {
-  const budgets = await listUserBudgets();
+  const budgets = await listBudgets();
 
   return (
     <div className="w-full max-w-xs">
