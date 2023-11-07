@@ -21,7 +21,7 @@ export const budgets = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (budgets) => ({
-    nameIndex: uniqueIndex("name_idx").on(budgets.name),
+    nameIndex: index("name_idx").on(budgets.name),
   }),
 );
 
@@ -35,8 +35,8 @@ export const accounts = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (accounts) => ({
-    nameIndex: uniqueIndex("name_idx").on(accounts.name),
-    budgetIdIndex: uniqueIndex("budget_id_idx").on(accounts.budgetId),
+    nameIndex: index("name_idx").on(accounts.name),
+    budgetIdIndex: index("budget_id_idx").on(accounts.budgetId),
   }),
 );
 
@@ -68,9 +68,9 @@ export const transactions = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (transactions) => ({
-    nameIndex: uniqueIndex("name_idx").on(transactions.name),
-    accountIdIndex: uniqueIndex("account_id_idx").on(transactions.accountId),
-    categoryIdIndex: uniqueIndex("category_id_idx").on(transactions.categoryId),
+    nameIndex: index("name_idx").on(transactions.name),
+    accountIdIndex: index("account_id_idx").on(transactions.accountId),
+    categoryIdIndex: index("category_id_idx").on(transactions.categoryId),
   }),
 );
 
@@ -95,8 +95,8 @@ export const categoryGroups = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categoryGroups) => ({
-    nameIndex: uniqueIndex("name_idx").on(categoryGroups.name),
-    budgetIdIndex: uniqueIndex("budget_id_idx").on(categoryGroups.budgetId),
+    nameIndex: index("name_idx").on(categoryGroups.name),
+    budgetIdIndex: index("budget_id_idx").on(categoryGroups.budgetId),
   }),
 );
 
@@ -121,8 +121,8 @@ export const categories = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categories) => ({
-    nameIndex: uniqueIndex("name_idx").on(categories.name),
-    categoryGroupId: uniqueIndex("category_group_id_idx").on(
+    nameIndex: index("name_idx").on(categories.name),
+    categoryGroupId: index("category_group_id_idx").on(
       categories.categoryGroupId,
     ),
   }),
@@ -148,11 +148,11 @@ export const categoryFunds = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categoryFunds) => ({
-    monthYearIndex: uniqueIndex("month_year_idx").on(
+    monthYearCategoryIndex: uniqueIndex("month_year_category_id_idx").on(
       categoryFunds.month,
       categoryFunds.year,
+      categoryFunds.categoryId,
     ),
-    categoryId: uniqueIndex("category_id_idx").on(categoryFunds.categoryId),
   }),
 );
 
