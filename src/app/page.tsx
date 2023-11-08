@@ -5,6 +5,7 @@ import { Input } from "./_components/Input";
 import { redirect } from "next/navigation";
 
 import { z } from "zod";
+import { Button } from "./_components/Button";
 
 export default async function Home() {
   const user = await currentUser();
@@ -62,14 +63,9 @@ async function NewBudgetForm() {
   return (
     <form action={create}>
       <h2 className="pb-4 text-xl">New Budget</h2>
-      <div className="grid gap-2">
+      <div className="grid gap-4">
         <Input name="budgetName" label="Name" required />
-        <button
-          type="submit"
-          className="rounded bg-indigo-600 px-4 py-1 font-medium text-white shadow-sm hover:bg-indigo-600/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
-        >
-          Create
-        </button>
+        <Button type="submit">Create</Button>
       </div>
     </form>
   );

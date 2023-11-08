@@ -3,6 +3,7 @@ import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { getBudgetWithAccounts } from "~/data/budgets";
 import { currentUser } from "~/data/user";
+import { Button } from "./Button";
 
 export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
   const user = await currentUser();
@@ -12,9 +13,6 @@ export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
     <div className="flex h-full w-72 flex-col bg-gray-900 p-6 text-gray-100">
       <h2 className="flex items-center pb-4 text-xl">{budget?.name}</h2>
       <nav className="flex flex-1 flex-col">
-        <Link href="/" className="text-sm">
-          View all budgets
-        </Link>
         <ul className="flex flex-1 flex-col">
           {budget?.accounts.map((account) => (
             <li key={account.publicId}>
@@ -31,8 +29,10 @@ export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
               </Link>
             </li>
           ))}
+          <Button>New account</Button>
         </ul>
         <div className="grid gap-2">
+          <Link href="/">View all budgets</Link>
           <SignOutButton>
             <button className="text-left">Sign out</button>
           </SignOutButton>
