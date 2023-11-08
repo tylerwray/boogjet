@@ -4,12 +4,12 @@ import Link from "next/link";
 import { getBudgetWithAccounts } from "~/data/budgets";
 import { currentUser } from "~/data/user";
 
-export async function SideNav({ budgetId }: { budgetId: number }) {
+export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
   const user = await currentUser();
-  const budget = await getBudgetWithAccounts(budgetId);
+  const budget = await getBudgetWithAccounts(budgetPublicId);
 
   return (
-    <div className="flex h-full w-72 grow flex-col overflow-y-auto bg-gray-800 p-6 text-gray-100 ">
+    <div className="flex h-full w-72 flex-col bg-gray-900 p-6 text-gray-100">
       <h2 className="flex items-center pb-4 text-xl">{budget?.name}</h2>
       <nav className="flex flex-1 flex-col">
         <Link href="/" className="text-sm">
@@ -17,9 +17,9 @@ export async function SideNav({ budgetId }: { budgetId: number }) {
         </Link>
         <ul className="flex flex-1 flex-col">
           {budget?.accounts.map((account) => (
-            <li key={account.id}>
+            <li key={account.publicId}>
               <Link
-                href={`/budgets/${budget.id}/accounts/${account.id}`}
+                href={`/budgets/${budget.publicId}/accounts/${account.publicId}`}
                 className={`${
                   false
                     ? "bg-gray-800 text-white"

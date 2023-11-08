@@ -5,13 +5,12 @@ export default function BudgetLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { budgetId: number };
+  params: { id: string };
 }) {
-  console.log("TACO", params);
   return (
     <div className="grid h-full grid-cols-[auto_1fr]">
-      <SideNav budgetId={params.budgetId} />
-      {children}
+      <SideNav budgetPublicId={params.id} />
+      <main className="h-full bg-gray-800 p-6 text-gray-100">{children}</main>
     </div>
   );
 }

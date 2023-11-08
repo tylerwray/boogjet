@@ -15,12 +15,14 @@ export const budgets = mysqlTable(
   "budgets",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     userId: varchar("user_id", { length: 256 }).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (budgets) => ({
+    publicIdIndex: index("public_id_idx").on(budgets.publicId),
     nameIndex: index("name_idx").on(budgets.name),
   }),
 );
@@ -29,12 +31,14 @@ export const accounts = mysqlTable(
   "accounts",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     budgetId: int("budget_id").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (accounts) => ({
+    publicIdIndex: index("public_id_idx").on(accounts.publicId),
     nameIndex: index("name_idx").on(accounts.name),
     budgetIdIndex: index("budget_id_idx").on(accounts.budgetId),
   }),
@@ -56,6 +60,7 @@ export const transactions = mysqlTable(
   "transactions",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     accountId: int("account_id").notNull(),
     payee: varchar("payee", { length: 256 }),
@@ -68,6 +73,7 @@ export const transactions = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (transactions) => ({
+    publicIdIndex: index("public_id_idx").on(transactions.publicId),
     nameIndex: index("name_idx").on(transactions.name),
     accountIdIndex: index("account_id_idx").on(transactions.accountId),
     categoryIdIndex: index("category_id_idx").on(transactions.categoryId),
@@ -89,12 +95,14 @@ export const categoryGroups = mysqlTable(
   "category_groups",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     budgetId: int("budget_id").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categoryGroups) => ({
+    publicIdIndex: index("public_id_idx").on(categoryGroups.publicId),
     nameIndex: index("name_idx").on(categoryGroups.name),
     budgetIdIndex: index("budget_id_idx").on(categoryGroups.budgetId),
   }),
@@ -115,12 +123,14 @@ export const categories = mysqlTable(
   "categories",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     categoryGroupId: int("category_group_id").notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categories) => ({
+    publicIdIndex: index("public_id_idx").on(categories.publicId),
     nameIndex: index("name_idx").on(categories.name),
     categoryGroupId: index("category_group_id_idx").on(
       categories.categoryGroupId,
@@ -140,6 +150,7 @@ export const categoryFunds = mysqlTable(
   "category_funds",
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
+    publicId: varchar("public_id", { length: 24 }).notNull(),
     categoryId: int("category_id").notNull(),
     amount: int("amount"),
     month: int("month"),
@@ -148,6 +159,7 @@ export const categoryFunds = mysqlTable(
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },
   (categoryFunds) => ({
+    publicIdIndex: index("public_id_idx").on(categoryFunds.publicId),
     monthYearCategoryIndex: uniqueIndex("month_year_category_id_idx").on(
       categoryFunds.month,
       categoryFunds.year,

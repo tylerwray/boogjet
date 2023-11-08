@@ -1,4 +1,6 @@
 import { db } from "./db";
+import { generatePublicId } from "./helpers";
+import { budgets } from "./schema";
 import { currentUser } from "./user";
 
 export async function listBudgets() {
@@ -9,12 +11,26 @@ export async function listBudgets() {
   });
 }
 
-export async function getBudgetWithAccounts(budgetId: number) {
+export async function getBudgetWithAccounts(budgetPublicId: string) {
   const user = await currentUser();
 
   return db.query.budgets.findFirst({
     where: (budgets, { eq, and }) =>
-      and(eq(budgets.userId, user.id), eq(budgets.id, budgetId)),
+      and(eq(budgets.userId, user.id), eq(budgets.publicId, budgetPublicId)),
     with: { accounts: true },
   });
+}
+
+export async function createBudget(name: string) {
+  const user = await currentUser();
+
+  const publicId = generatePublicId("bud");
+
+  await db.insert(budgets).values({
+    name,
+    userId: user.id,
+    publicId,
+  });
+
+  return publicId;
 }
