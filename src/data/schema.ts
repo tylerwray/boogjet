@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { InferSelectModel, relations } from "drizzle-orm";
 import {
   int,
   mysqlEnum,
@@ -43,6 +43,8 @@ export const accounts = mysqlTable(
     budgetIdIndex: index("budget_id_idx").on(accounts.budgetId),
   }),
 );
+
+export type Account = InferSelectModel<typeof accounts>;
 
 export const budgetsRelations = relations(budgets, ({ many }) => ({
   accounts: many(accounts),

@@ -34,3 +34,12 @@ export async function createBudget(name: string) {
 
   return publicId;
 }
+
+export async function getBudget(budgetPublicId: string) {
+  const user = await currentUser();
+
+  return db.query.budgets.findFirst({
+    where: (budgets, { eq, and }) =>
+      and(eq(budgets.userId, user.id), eq(budgets.publicId, budgetPublicId)),
+  });
+}

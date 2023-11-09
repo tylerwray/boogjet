@@ -3,7 +3,8 @@ import { CurrencyDollarIcon } from "@heroicons/react/20/solid";
 import Link from "next/link";
 import { getBudgetWithAccounts } from "~/data/budgets";
 import { currentUser } from "~/data/user";
-import { Button } from "./Button";
+import { NewAccountButton } from "./NewAccountButton";
+import { useParams } from "next/navigation";
 
 export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
   const user = await currentUser();
@@ -29,7 +30,7 @@ export async function SideNav({ budgetPublicId }: { budgetPublicId: string }) {
               </Link>
             </li>
           ))}
-          <Button>New account</Button>
+          <NewAccountButton />
         </ul>
         <div className="grid gap-2">
           <Link href="/">View all budgets</Link>
