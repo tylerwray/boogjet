@@ -27,6 +27,12 @@ export const budgets = mysqlTable(
   }),
 );
 
+export type Budget = InferSelectModel<typeof budgets>;
+
+export const budgetsRelations = relations(budgets, ({ many }) => ({
+  accounts: many(accounts),
+}));
+
 export const accounts = mysqlTable(
   "accounts",
   {
@@ -45,10 +51,6 @@ export const accounts = mysqlTable(
 );
 
 export type Account = InferSelectModel<typeof accounts>;
-
-export const budgetsRelations = relations(budgets, ({ many }) => ({
-  accounts: many(accounts),
-}));
 
 export const accountsRelations = relations(accounts, ({ one, many }) => ({
   budget: one(budgets, {
@@ -82,6 +84,8 @@ export const transactions = mysqlTable(
   }),
 );
 
+export type Transaction = InferSelectModel<typeof transactions>;
+
 export const transactionsRelations = relations(transactions, ({ one }) => ({
   account: one(accounts, {
     fields: [transactions.accountId],
@@ -109,6 +113,8 @@ export const categoryGroups = mysqlTable(
     budgetIdIndex: index("budget_id_idx").on(categoryGroups.budgetId),
   }),
 );
+
+export type CategoryGroup = InferSelectModel<typeof categoryGroups>;
 
 export const categoryGroupsRelations = relations(
   categoryGroups,
@@ -140,6 +146,8 @@ export const categories = mysqlTable(
   }),
 );
 
+export type Category = InferSelectModel<typeof categories>;
+
 export const categoriesRelations = relations(categories, ({ one, many }) => ({
   categoryGroup: one(categoryGroups, {
     fields: [categories.categoryGroupId],
@@ -169,6 +177,8 @@ export const categoryFunds = mysqlTable(
     ),
   }),
 );
+
+export type CategoryFunds = InferSelectModel<typeof categoryFunds>;
 
 export const categoryFundsRelations = relations(categoryFunds, ({ one }) => ({
   category: one(categories, {

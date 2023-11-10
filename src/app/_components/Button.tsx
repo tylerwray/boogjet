@@ -43,7 +43,7 @@ const variants = {
   outline: {
     primary:
       "shadow text-indigo-600 enabled:hover:bg-indigo-600/20 bg-transparent ring-1 ring-inset ring-current",
-    gray: "shadow text-gray-300 enabled:hover:bg-gray-300/30 bg-transparent ring-1 ring-inset ring-current",
+    gray: "shadow text-gray-300 enabled:hover:bg-gray-700 bg-transparent ring-1 ring-inset ring-current",
   },
   solid: {
     primary:
@@ -66,8 +66,8 @@ type Variant = keyof typeof variants;
 type Color = keyof (typeof variants)["solid"];
 
 const sizes = {
-  sm: "h-6 min-w-[2.5rem] text-sm font-light px-4",
-  base: "h-10 min-w-[2.5rem] text-md px-4",
+  sm: "h-8 min-w-[2.5rem] text-sm px-4",
+  base: "h-10 min-w-[2.5rem] text-base px-4",
   lg: "h-12 min-w-[3rem] text-lg px-6",
 } as const;
 

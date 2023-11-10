@@ -25,6 +25,7 @@ export function NewAccountButton() {
         onClick={openModal}
         variant="ghost"
         color="gray"
+        size="sm"
         leftIcon={<PlusIcon />}
       >
         New account
@@ -55,7 +56,7 @@ export function NewAccountButton() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-950 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-200"
@@ -76,12 +77,16 @@ export function NewAccountButton() {
 }
 
 function NewAccountForm() {
-  const params = useParams<{ id: string }>();
+  const params = useParams<{ budgetPublicId: string }>();
 
   return (
     <form action={createAccountAction}>
       <div className="grid gap-4">
-        <input hidden name="budgetPublicId" defaultValue={params.id} />
+        <input
+          hidden
+          name="budgetPublicId"
+          defaultValue={params.budgetPublicId}
+        />
         <Input name="accountName" label="Name" required />
         <Button type="submit">Create</Button>
       </div>

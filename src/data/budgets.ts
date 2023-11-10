@@ -1,3 +1,4 @@
+import { createDefaultCategoryStructure } from "./categoryGroups";
 import { db } from "./db";
 import { generatePublicId } from "./helpers";
 import { budgets } from "./schema";
@@ -32,14 +33,20 @@ export async function createBudget(name: string) {
     publicId,
   });
 
+  await createDefaultCategoryStructure(publicId);
+
   return publicId;
 }
 
 export async function getBudget(budgetPublicId: string) {
   const user = await currentUser();
 
-  return db.query.budgets.findFirst({
+  const budget = await db.query.budgets.findFirst({
     where: (budgets, { eq, and }) =>
       and(eq(budgets.userId, user.id), eq(budgets.publicId, budgetPublicId)),
   });
+
+  if (!budget) throw new Error("No budget found");
+
+  return budget;
 }
