@@ -1,6 +1,6 @@
 import { InputHTMLAttributes, HTMLProps, useId } from "react";
 
-type Props = InputHTMLAttributes<HTMLInputElement> & { label: string };
+type Props = InputHTMLAttributes<HTMLInputElement> & { label?: string };
 
 export function Input(props: Props) {
   const id = useId();

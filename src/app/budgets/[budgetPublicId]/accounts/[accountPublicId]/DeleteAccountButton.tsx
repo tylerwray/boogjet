@@ -7,6 +7,7 @@ import { Modal } from "~/app/_components/Modal";
 import { deleteAccountAction } from "./actions";
 import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
+import { Input } from "~/app/_components/Input";
 
 export function DeleteAccountButton() {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,7 +29,7 @@ export function DeleteAccountButton() {
         size="sm"
         leftIcon={<TrashIcon />}
       >
-        Delete Account
+        Delete
       </Button>
       <Modal isOpen={isOpen} onClose={closeModal} title="Delete account">
         <DeleteAccountForm onCancel={closeModal} />
@@ -40,7 +41,11 @@ export function DeleteAccountButton() {
 function DeleteAccountForm({ onCancel }: { onCancel: () => void }) {
   return (
     <form action={deleteAccountAction}>
-      <p className="pb-4">Are you sure you want to delete your account?</p>
+      <p className="pb-4">
+        Are you sure you want to delete your account?
+        <br />
+        Type 'delete account' to confirm.
+      </p>
       <DeleteAccountFormFields onCancel={onCancel} />
     </form>
   );
@@ -55,7 +60,7 @@ function DeleteAccountFormFields({ onCancel }: { onCancel: () => void }) {
   const { pending } = useFormStatus();
 
   return (
-    <>
+    <div className="grid gap-4">
       <input
         hidden
         name="accountPublicId"
@@ -66,6 +71,7 @@ function DeleteAccountFormFields({ onCancel }: { onCancel: () => void }) {
         name="budgetPublicId"
         defaultValue={params.budgetPublicId}
       />
+      <Input required pattern="delete account" placeholder="delete account" />
       <div className="flex justify-end gap-2">
         <Button
           type="button"
@@ -81,6 +87,6 @@ function DeleteAccountFormFields({ onCancel }: { onCancel: () => void }) {
           Yes, Delete Account
         </Button>
       </div>
-    </>
+    </div>
   );
 }

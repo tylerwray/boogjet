@@ -39,15 +39,15 @@ export async function createAccount(name: string, budgetPublicId: string) {
   return publicId;
 }
 
-export async function softDeleteAccount(accountPublicId: string) {
+export async function updateAccount(
+  accountPublicId: string,
+  values: { deletedAt?: Date; name?: string },
+) {
   const account = await getAccount(accountPublicId);
 
   if (!account) {
     throw new Error("Account not found.");
   }
 
-  await db
-    .update(accounts)
-    .set({ deletedAt: new Date() })
-    .where(eq(accounts.id, account.id));
+  await db.update(accounts).set(values).where(eq(accounts.id, account.id));
 }
