@@ -40,6 +40,7 @@ export const accounts = mysqlTable(
     publicId: varchar("public_id", { length: 24 }).notNull(),
     name: varchar("name", { length: 256 }),
     budgetId: int("budget_id").notNull(),
+    deletedAt: timestamp("deleted_at"),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
   },

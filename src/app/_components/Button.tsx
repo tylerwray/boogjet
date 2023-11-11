@@ -37,28 +37,32 @@ export function Button(props: Props) {
 }
 
 const baseClasses =
-  "flex gap-1 appearance-none items-center justify-center select-none align-middle focus:outline-none rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
+  "flex gap-1 appearance-none items-center justify-center select-none align-middle focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md transition duration-200 disabled:opacity-50 disabled:cursor-not-allowed";
 
 const variants = {
   outline: {
     primary:
       "shadow text-indigo-600 enabled:hover:bg-indigo-600/20 bg-transparent ring-1 ring-inset ring-current",
-    gray: "shadow text-gray-300 enabled:hover:bg-gray-700 bg-transparent ring-1 ring-inset ring-current",
+    gray: "shadow text-gray-300 enabled:hover:bg-gray-600/20 bg-transparent ring-1 ring-inset ring-current",
+    red: "shadow text-red-700 enabled:hover:bg-red-700/20 bg-transparent ring-1 ring-inset ring-current",
   },
   solid: {
     primary:
       "shadow bg-indigo-600 enabled:hover:bg-indigo-500 text-white ring-indigo-600",
     gray: "",
+    red: "shadow bg-red-700 enabled:hover:bg-red-600 text-white focus:ring-offset-red-700",
   },
   ghost: {
     primary:
       "bg-transparent shadow-none enabled:hover:shadow text-indigo-600 enabled:hover:bg-indigo-600/20 ring-current",
     gray: "bg-transparent shadow-none enabled:hover:shadow text-gray-300 enabled:hover:bg-gray-300/10 ring-current",
+    red: "bg-transparent shadow-none enabled:hover:shadow text-red-600 enabled:hover:bg-red-600/10 ring-current",
   },
   link: {
     primary:
       "shadow-none bg-transparent text-indigo-600 enabled:hover:underline ring-current",
     gray: "",
+    red: "shadow-none bg-transparent text-red-600 enabled:hover:underline ring-current",
   },
 } as const;
 

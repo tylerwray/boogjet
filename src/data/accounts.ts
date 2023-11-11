@@ -1,7 +1,8 @@
+import { eq } from "drizzle-orm";
 import { getBudget } from "./budgets";
 import { db } from "./db";
 import { generatePublicId } from "./helpers";
-import { accounts, budgets, Account } from "./schema";
+import { accounts } from "./schema";
 import { currentUser } from "./user";
 
 export async function getAccount(accountPublicId: string) {
@@ -36,4 +37,17 @@ export async function createAccount(name: string, budgetPublicId: string) {
   });
 
   return publicId;
+}
+
+export async function softDeleteAccount(accountPublicId: string) {
+  const account = await getAccount(accountPublicId);
+
+  if (!account) {
+    throw new Error("Account not found.");
+  }
+
+  await db
+    .update(accounts)
+    .set({ deletedAt: new Date() })
+    .where(eq(accounts.id, account.id));
 }

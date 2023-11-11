@@ -18,7 +18,11 @@ export async function getBudgetWithAccounts(budgetPublicId: string) {
   return db.query.budgets.findFirst({
     where: (budgets, { eq, and }) =>
       and(eq(budgets.userId, user.id), eq(budgets.publicId, budgetPublicId)),
-    with: { accounts: true },
+    with: {
+      accounts: {
+        where: (accounts, { isNull }) => isNull(accounts.deletedAt),
+      },
+    },
   });
 }
 

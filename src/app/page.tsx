@@ -64,7 +64,7 @@ async function NewBudgetForm() {
     <form action={create}>
       <h2 className="pb-4 text-xl">New Budget</h2>
       <div className="grid gap-4">
-        <Input name="budgetName" label="Name" required />
+        <Input name="budgetName" label="Name" required autoComplete="off" />
         <Button type="submit">Create</Button>
       </div>
     </form>
