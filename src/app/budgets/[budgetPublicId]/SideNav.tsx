@@ -22,7 +22,7 @@ export function SideNav({ budget }: Props) {
   const { user } = useUser();
 
   return (
-    <div className="flex h-full w-72 flex-col bg-gray-800 p-6 text-gray-200">
+    <div className="flex h-full w-72 flex-col border-r border-gray-700 bg-gray-800 p-6 text-gray-200">
       <h2 className="flex items-center pb-4 text-xl">{budget?.name}</h2>
       <nav className="flex flex-1 flex-col">
         <NavItem

@@ -70,6 +70,7 @@ type Variant = keyof typeof variants;
 type Color = keyof (typeof variants)["solid"];
 
 const sizes = {
+  xs: "h-7 min-w-[2rem] text-xs px-2",
   sm: "h-8 min-w-[2.5rem] text-sm px-4",
   base: "h-10 min-w-[2.5rem] text-base px-4",
   lg: "h-12 min-w-[3rem] text-lg px-6",

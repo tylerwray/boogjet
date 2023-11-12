@@ -4,6 +4,13 @@ import { db } from "./db";
 import { generatePublicId } from "./helpers";
 import { categoryGroups } from "./schema";
 
+export async function getCategoryGroup(categoryGroupPublicId: string) {
+  return db.query.categoryGroups.findFirst({
+    where: (categoryGroups, { eq }) =>
+      eq(categoryGroups.publicId, categoryGroupPublicId),
+  });
+}
+
 export async function listCategoryGroups(budgetPublicId: string) {
   const budget = await getBudget(budgetPublicId);
 
