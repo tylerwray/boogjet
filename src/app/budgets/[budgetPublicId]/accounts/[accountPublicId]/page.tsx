@@ -13,7 +13,7 @@ export default async function AccountPage({
   if (!account) return null;
 
   return (
-    <div className="grid h-full grid-cols-[1fr_auto_auto] gap-2 bg-gray-800 p-8">
+    <div className="grid h-full grid-cols-[1fr_auto_auto] gap-2 p-8">
       {account?.name}
       <EditAccountButton account={account} />
       <DeleteAccountButton />

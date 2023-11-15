@@ -39,8 +39,8 @@ const sizes = {
 type Size = keyof typeof sizes;
 
 const colors = {
-  indigo: "fill-blue-600 text-gray-200 dark:text-gray-600",
-  gray: "fill-gray-400 text-gray-200 dark:text-gray-600",
+  indigo: "fill-blue-600 text-zinc-200 dark:text-zinc-600",
+  gray: "fill-zinc-400 text-zinc-200 dark:text-zinc-600",
 } as const;
 
 type Color = keyof typeof colors;

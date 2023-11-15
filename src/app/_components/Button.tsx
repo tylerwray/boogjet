@@ -43,20 +43,20 @@ const variants = {
   outline: {
     primary:
       "shadow text-indigo-600 enabled:hover:bg-indigo-600/20 bg-transparent ring-1 ring-inset ring-current",
-    gray: "shadow text-gray-300 enabled:hover:bg-gray-600/20 bg-transparent ring-1 ring-inset ring-current",
+    gray: "shadow text-zinc-300 enabled:hover:bg-zinc-500/20 bg-transparent ring-1 ring-inset ring-current",
     red: "shadow text-red-700 enabled:hover:bg-red-700/20 bg-transparent ring-1 ring-inset ring-current",
   },
   solid: {
     primary:
-      "shadow bg-indigo-600 enabled:hover:bg-indigo-500 text-white ring-indigo-600",
+      "shadow bg-indigo-600 enabled:hover:bg-indigo-700 text-white ring-indigo-600",
     gray: "",
-    red: "shadow bg-red-700 enabled:hover:bg-red-600 text-white focus:ring-offset-red-700",
+    red: "shadow bg-red-700 enabled:hover:bg-red-800 text-white focus:ring-offset-red-700",
   },
   ghost: {
     primary:
       "bg-transparent shadow-none enabled:hover:shadow text-indigo-600 enabled:hover:bg-indigo-600/20 ring-current",
-    gray: "bg-transparent shadow-none enabled:hover:shadow text-gray-300 enabled:hover:bg-gray-300/10 ring-current",
-    red: "bg-transparent shadow-none enabled:hover:shadow text-red-600 enabled:hover:bg-red-600/10 ring-current",
+    gray: "bg-transparent shadow-none enabled:hover:shadow text-zinc-300 enabled:hover:bg-zinc-600/20 ring-current",
+    red: "bg-transparent shadow-none enabled:hover:shadow text-red-600 enabled:hover:bg-red-600/20 ring-current",
   },
   link: {
     primary:

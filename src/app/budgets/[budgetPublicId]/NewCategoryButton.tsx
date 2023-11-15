@@ -39,7 +39,7 @@ export function NewCategoryButton({
         />
       </div>
       <button
-        className={`flex w-full items-center px-8 py-2 text-sm hover:bg-gray-700/20 ${
+        className={`flex w-full items-center px-8 py-2 text-sm hover:bg-zinc-700/20 ${
           isOpen ? "hidden" : "block"
         }`}
         onClick={openInput}

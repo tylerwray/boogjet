@@ -1,5 +1,5 @@
-import { SideNav } from "./SideNav";
 import { getBudgetWithAccounts } from "~/data/budgets";
+import { Shell } from "./Shell";
 
 export default async function BudgetLayout({
   children,
@@ -12,10 +12,5 @@ export default async function BudgetLayout({
 
   if (!budget) return null;
 
-  return (
-    <div className="grid h-full grid-cols-[auto_1fr]">
-      <SideNav budget={budget} />
-      <main className="h-full text-gray-100">{children}</main>
-    </div>
-  );
+  return <Shell>{children}</Shell>;
 }

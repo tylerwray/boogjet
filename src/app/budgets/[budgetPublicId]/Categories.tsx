@@ -30,8 +30,8 @@ export function Categories({
       {optimisticCategories.map((c) => (
         <div
           key={c.publicId}
-          className={`flex h-10 cursor-pointer items-center gap-2 border-b border-gray-700 px-8 py-2 hover:bg-gray-700/20 ${
-            c.publicId === "optimistic" ? "text-gray-200/30" : ""
+          className={`flex h-10 cursor-pointer items-center gap-2 border-b border-zinc-800 px-8 py-2 hover:bg-zinc-700/20 ${
+            c.publicId === "optimistic" ? "text-zinc-200/30" : ""
           }`}
         >
           {c.name}

@@ -13,14 +13,12 @@ export default async function BudgetPage({
   const budget = await getBudget(params.budgetPublicId);
 
   return (
-    <div className="h-full bg-gray-900">
+    <div className="h-full">
       <h2 className="px-4 py-4 text-xl">{budget.name}</h2>
       <div className="grid">
         {categoryGroups.map((cg) => (
           <div key={cg.publicId}>
-            <h3 className="border-b border-gray-700 bg-gray-800 px-4 py-2">
-              {cg.name}
-            </h3>
+            <h3 className="border-b border-zinc-800 px-4 py-2">{cg.name}</h3>
             <Categories
               categories={cg.categories}
               categoryGroupPublicId={cg.publicId}

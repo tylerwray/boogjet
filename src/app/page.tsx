@@ -13,7 +13,7 @@ export default async function Home() {
   if (!user) return null;
 
   return (
-    <main className="grid min-h-screen content-start justify-center gap-4 bg-gray-900 py-16 text-gray-100">
+    <main className="grid min-h-screen content-start justify-center gap-4 bg-black py-16 text-zinc-100">
       <h2 className="text-xl">Budgets</h2>
       <Budgets />
     </main>
@@ -31,14 +31,14 @@ async function Budgets() {
         budgets.map((b) => (
           <Link
             key={b.publicId}
-            className="block rounded-md border border-gray-500 bg-gray-800 px-2 py-4 hover:bg-gray-700/60"
+            className="block rounded-md border border-zinc-500 bg-zinc-800 px-2 py-4 hover:bg-zinc-600/60"
             href={`/budgets/${b.publicId}`}
           >
             {b.name}
           </Link>
         ))
       )}
-      <hr className="border-gray-500" />
+      <hr className="border-zinc-700" />
       <NewBudgetForm />
     </div>
   );

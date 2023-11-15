@@ -36,11 +36,11 @@ export function Modal(props: Props) {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
+              <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-zinc-900 p-6 text-left align-middle shadow-xl transition-all">
                 <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                   <button
                     type="button"
-                    className="rounded-md text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-700"
+                    className="rounded-md text-zinc-400 hover:bg-zinc-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-zinc-700"
                     onClick={props.onClose}
                   >
                     <span className="sr-only">Close</span>
@@ -49,11 +49,11 @@ export function Modal(props: Props) {
                 </div>
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-200"
+                  className="text-lg font-medium leading-6 text-zinc-100"
                 >
                   {props.title}
                 </Dialog.Title>
-                <div className="pt-4 text-gray-300">{props.children}</div>
+                <div className="pt-4 text-zinc-300">{props.children}</div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
