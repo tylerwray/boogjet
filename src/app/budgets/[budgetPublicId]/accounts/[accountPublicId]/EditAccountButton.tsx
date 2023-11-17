@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import { Button } from "~/app/_components/Button";
-import { Modal } from "~/app/_components/Modal";
+import { Button } from "~/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog"
+
 import { deleteAccountAction, editAccountAction } from "./actions";
 import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
-import { PencilIcon } from "@heroicons/react/20/solid";
-import { Input } from "~/app/_components/Input";
+import { Input } from "~/components/ui/input";
 import { Account } from "~/data/schema";
 
 type Props = {
@@ -15,39 +21,22 @@ type Props = {
 };
 
 export function EditAccountButton({ account }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   return (
-    <>
-      <Button
-        onClick={openModal}
-        color="gray"
-        variant="outline"
-        size="sm"
-        leftIcon={<PencilIcon />}
-      >
-        Edit
-      </Button>
-      <Modal
-        isOpen={isOpen}
-        onClose={closeModal}
-        title={`Edit account - ${account.name}`}
-      >
-        <EditAccountForm
-          id="edit-account-form"
-          onCancel={closeModal}
-          account={account}
-        />
-      </Modal>
-    </>
+    <Dialog>
+      <DialogTrigger>Edit</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Edit account - {account.name}</DialogTitle>
+          <DialogDescription>
+            <EditAccountForm
+              id="edit-account-form"
+              account={account}
+              onCancel={() => { }}
+            />
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 }
 

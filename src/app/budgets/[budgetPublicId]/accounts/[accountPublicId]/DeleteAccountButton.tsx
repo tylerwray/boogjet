@@ -1,57 +1,52 @@
 "use client";
 
-import { TrashIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
-import { Button } from "~/app/_components/Button";
-import { Modal } from "~/app/_components/Modal";
+import { Button } from "~/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "~/components/ui/dialog"
+
 import { deleteAccountAction } from "./actions";
 import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
-import { Input } from "~/app/_components/Input";
+import { Input } from "~/components/ui/input";
 
 export function DeleteAccountButton() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   return (
     <>
-      <Button
-        onClick={openModal}
-        color="red"
-        variant="outline"
-        size="sm"
-        leftIcon={<TrashIcon />}
-      >
-        Delete
-      </Button>
-      <Modal isOpen={isOpen} onClose={closeModal} title="Delete account">
-        <DeleteAccountForm onCancel={closeModal} />
-      </Modal>
+      <Dialog>
+        <DialogTrigger>Delete</DialogTrigger>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Delete account</DialogTitle>
+            <DialogDescription>
+              <p className="pb-4">
+                Are you sure you want to delete your account?
+                <br />
+                Type 'delete account' to confirm.
+              </p>
+              <DeleteAccountForm />
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }
 
-function DeleteAccountForm({ onCancel }: { onCancel: () => void }) {
+function DeleteAccountForm() {
   return (
     <form action={deleteAccountAction}>
-      <p className="pb-4">
-        Are you sure you want to delete your account?
-        <br />
-        Type 'delete account' to confirm.
-      </p>
-      <DeleteAccountFormFields onCancel={onCancel} />
+      <DeleteAccountFormFields />
     </form>
   );
 }
 
-function DeleteAccountFormFields({ onCancel }: { onCancel: () => void }) {
+function DeleteAccountFormFields() {
   const params = useParams<{
     budgetPublicId: string;
     accountPublicId: string;
@@ -78,7 +73,6 @@ function DeleteAccountFormFields({ onCancel }: { onCancel: () => void }) {
           color="gray"
           variant="ghost"
           size="sm"
-          onClick={onCancel}
           disabled={pending}
         >
           Cancel

@@ -2,8 +2,11 @@ import "~/styles/globals.css";
 import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
+import { cn } from "~/lib/utils";
+import { ThemeProvider } from "~/app/components/theme-provider";
+import { Shell } from "./shell";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans", });
 
 export const metadata: Metadata = {
   title: "Boojet",
@@ -18,8 +21,19 @@ export default function RootLayout({
 }) {
   return (
     <ClerkProvider>
-      <html lang="en" className="h-full dark:bg-black">
-        <body className={`${inter.className} h-full`}>{children}</body>
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn(inter.variable, "h-full")}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Shell>
+              {children}
+            </Shell>
+          </ThemeProvider>
+        </body>
       </html>
     </ClerkProvider>
   );

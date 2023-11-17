@@ -1,8 +1,7 @@
 "use client";
-import { PlusIcon } from "@heroicons/react/20/solid";
 import { useRef, useState } from "react";
-import { Button } from "~/app/_components/Button";
-import { Input } from "~/app/_components/Input";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
 import { createCategoryAction } from "./actions";
 import { useParams } from "next/navigation";
 import { useFormStatus } from "react-dom";
@@ -44,7 +43,6 @@ export function NewCategoryButton({
         }`}
         onClick={openInput}
       >
-        <PlusIcon className="h-5 w-5" />
         New category
       </button>
     </div>
@@ -115,15 +113,9 @@ function NewCategoryFormFields({
         hidden
         defaultValue={categoryGroupPublicId}
       />
-      <Input
-        name="categoryName"
-        disabled={pending}
-        required
-        ref={nameRef}
-        size="sm"
-      />
+      <Input name="categoryName" disabled={pending} required ref={nameRef} />
       <Button
-        size="xs"
+        size="sm"
         variant="ghost"
         color="gray"
         onClick={closeInput}
@@ -132,7 +124,7 @@ function NewCategoryFormFields({
       >
         Cancel
       </Button>
-      <Button size="xs" type="submit" disabled={pending} onClick={closeInput}>
+      <Button size="sm" type="submit" disabled={pending} onClick={closeInput}>
         Save
       </Button>
     </div>

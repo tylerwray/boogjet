@@ -1,5 +1,3 @@
-import { PlusIcon } from "@heroicons/react/20/solid";
-import { Button } from "~/app/_components/Button";
 import { getBudget } from "~/data/budgets";
 import { listCategoryGroups } from "~/data/categoryGroups";
 import { Categories } from "./Categories";
@@ -25,9 +23,6 @@ export default async function BudgetPage({
             />
           </div>
         ))}
-        <Button variant="ghost" color="gray" size="sm" leftIcon={<PlusIcon />}>
-          New category group
-        </Button>
       </div>
     </div>
   );

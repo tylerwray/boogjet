@@ -16,7 +16,7 @@ export const budgets = mysqlTable(
   {
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
     publicId: varchar("public_id", { length: 24 }).notNull(),
-    name: varchar("name", { length: 256 }),
+    name: varchar("name", { length: 256 }).notNull(),
     userId: varchar("user_id", { length: 256 }).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull(),
