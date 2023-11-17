@@ -1,5 +1,5 @@
 import { getBudget } from "./budgets";
-import { createCategories, createCategory } from "./categories";
+import { createCategories } from "./categories";
 import { db } from "./db";
 import { generatePublicId } from "./helpers";
 import { categoryGroups } from "./schema";

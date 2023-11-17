@@ -13,7 +13,7 @@ export default async function Home() {
   if (!user) return null;
 
   return (
-    <main className="grid min-h-screen content-start justify-center gap-4 bg-black py-16 text-zinc-100">
+    <main className="grid min-h-screen flex-1 content-start justify-center gap-4 bg-black py-16 text-zinc-100">
       <h2 className="text-xl">Budgets</h2>
       <Budgets />
     </main>
