@@ -6,7 +6,7 @@ import { cn } from "~/lib/utils";
 import { ThemeProvider } from "~/app/components/theme-provider";
 import { Shell } from "./shell";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans", });
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Boojet",
@@ -22,16 +22,19 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={cn(inter.variable, "h-full")}>
+        <body
+          className={cn(
+            inter.variable,
+            "min-h-screen bg-background font-sans antialiased",
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
-            <Shell>
-              {children}
-            </Shell>
+            <Shell>{children}</Shell>
           </ThemeProvider>
         </body>
       </html>
