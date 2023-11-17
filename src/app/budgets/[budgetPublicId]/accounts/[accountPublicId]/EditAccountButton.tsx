@@ -8,7 +8,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "~/components/ui/dialog"
+} from "~/components/ui/dialog";
 
 import { deleteAccountAction, editAccountAction } from "./actions";
 import { useParams } from "next/navigation";
@@ -31,7 +31,7 @@ export function EditAccountButton({ account }: Props) {
             <EditAccountForm
               id="edit-account-form"
               account={account}
-              onCancel={() => { }}
+              onCancel={() => {}}
             />
           </DialogDescription>
         </DialogHeader>
@@ -88,7 +88,6 @@ function EditAccountFormFields({
         defaultValue={params.budgetPublicId}
       />
       <Input
-        label="Name"
         name="accountName"
         defaultValue={account.name}
         autoComplete="off"

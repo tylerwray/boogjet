@@ -1,4 +1,4 @@
-import { Button } from "~/app/_components/Button";
+import { Button } from "~/components/ui/button";
 import { getAccount } from "~/data/accounts";
 import { EditAccountButton } from "./EditAccountButton";
 import { DeleteAccountButton } from "./DeleteAccountButton";

@@ -1,4 +1,3 @@
 export default function RootPage() {
-  return "hello"
+  return "hello";
 }
-
