@@ -30,21 +30,13 @@ import {
   DialogTrigger,
 } from "~/components/ui/dialog";
 import { Input } from "~/components/ui/input";
-import { Label } from "~/components/ui/label";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "~/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "~/components/ui/select";
 import { Budget } from "~/data/schema";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
 type Selection = { label: string; value: string };
 
@@ -57,18 +49,19 @@ interface BudgetSwitcherProps extends PopoverTriggerProps {
 }
 
 export function BudgetSwitcher({ className, budgets }: BudgetSwitcherProps) {
+  const params = useParams<{ budgetPublicId: string }>();
   const router = useRouter();
 
-  const groups = [
-    {
-      label: "Budgets",
-      budgets: budgets.map((b) => ({ label: b.name, value: b.publicId })),
-    },
-  ];
+  const budgetItems = budgets.map((b) => ({
+    label: b.name,
+    value: b.publicId,
+  }));
+
   const [open, setOpen] = useState(false);
   const [showNewTeamDialog, setShowNewTeamDialog] = useState(false);
   const [selectedBudget, setSelectedBudget] = useState<Selection>(
-    groups[0].budgets[0],
+    budgetItems.find((b) => b.value === params.budgetPublicId) ||
+      budgetItems[0],
   );
 
   return (
@@ -98,34 +91,33 @@ export function BudgetSwitcher({ className, budgets }: BudgetSwitcherProps) {
             <CommandList>
               <CommandInput placeholder="Search budget..." />
               <CommandEmpty>No budget found.</CommandEmpty>
-              {groups.map((group) => (
-                <CommandGroup key={group.label} heading={group.label}>
-                  {group.budgets.map((budget) => (
-                    <CommandItem
-                      key={budget.value}
-                      onSelect={() => {
-                        setSelectedBudget(budget);
-                        setOpen(false);
-                        router.push(`/budgets/${budget.value}`);
-                      }}
-                      className="text-sm"
-                    >
-                      <Avatar className="mr-2 h-5 w-5">
-                        <AvatarFallback>M</AvatarFallback>
-                      </Avatar>
-                      {budget.label}
-                      <CheckIcon
-                        className={cn(
-                          "ml-auto h-4 w-4",
-                          selectedBudget.value === budget.value
-                            ? "opacity-100"
-                            : "opacity-0",
-                        )}
-                      />
-                    </CommandItem>
-                  ))}
-                </CommandGroup>
-              ))}
+              <CommandGroup heading="Budgets">
+                {budgetItems.map((budget) => (
+                  <CommandItem
+                    key={budget.value}
+                    value={budget.value}
+                    onSelect={() => {
+                      setSelectedBudget(budget);
+                      setOpen(false);
+                      router.push(`/budgets/${budget.value}`);
+                    }}
+                    className="text-sm"
+                  >
+                    <Avatar className="mr-2 h-5 w-5">
+                      <AvatarFallback>M</AvatarFallback>
+                    </Avatar>
+                    {budget.label}
+                    <CheckIcon
+                      className={cn(
+                        "ml-auto h-4 w-4",
+                        selectedBudget.value === budget.value
+                          ? "opacity-100"
+                          : "opacity-0",
+                      )}
+                    />
+                  </CommandItem>
+                ))}
+              </CommandGroup>
             </CommandList>
             <CommandSeparator />
             <CommandList>
