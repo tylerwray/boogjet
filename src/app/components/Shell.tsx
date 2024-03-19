@@ -1,11 +1,11 @@
 import { listBudgets } from "~/data/budgets";
 import { Metadata } from "next";
 
-import { MainNav } from "~/app/components/main-nav";
-import { Search } from "~/app/components/search";
-import { BudgetSwitcher } from "~/app/components/budget-switcher";
-import { UserNav } from "~/app/components/user-nav";
-import { ModeToggle } from "~/app/components/theme-toggle";
+import { MainNav } from "~/app/components/MainNav";
+import { Search } from "~/app/components/Search";
+import { BudgetSwitcher } from "~/app/components/BudgetSwitcher";
+import { UserNav } from "~/app/components/UserNav";
+import { ModeToggle } from "~/app/components/ThemeToggle";
 
 export const metadata: Metadata = {
   title: "Minimal Money",

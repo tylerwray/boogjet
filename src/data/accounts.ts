@@ -26,10 +26,6 @@ export async function createAccount(name: string, budgetPublicId: string) {
 
   const budget = await getBudget(budgetPublicId);
 
-  if (!budget) {
-    throw new Error("Budget not found.");
-  }
-
   await db.insert(accounts).values({
     name,
     budgetId: budget.id,

@@ -11,13 +11,28 @@ export async function getCategoryGroup(categoryGroupPublicId: string) {
   });
 }
 
-export async function listCategoryGroups(budgetPublicId: string) {
+export async function listCategoryGroups({
+  budgetPublicId,
+  month,
+  year,
+}: {
+  budgetPublicId: string;
+  month: number;
+  year: number;
+}) {
   const budget = await getBudget(budgetPublicId);
 
   return db.query.categoryGroups.findMany({
     where: (categoryGroups, { eq }) => eq(categoryGroups.budgetId, budget.id),
     with: {
-      categories: true,
+      categories: {
+        with: {
+          categoryFunds: {
+            where: (funds, { eq, and }) =>
+              and(eq(funds.month, month), eq(funds.year, year)),
+          },
+        },
+      },
     },
   });
 }

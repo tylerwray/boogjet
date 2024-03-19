@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import { cn } from "~/lib/utils";
-import { ThemeProvider } from "~/app/components/theme-provider";
-import { Shell } from "./shell";
+import { ThemeProvider } from "~/app/components/ThemeProvider";
+import { Shell } from "./components/Shell";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 

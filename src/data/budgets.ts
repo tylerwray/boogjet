@@ -54,3 +54,16 @@ export async function getBudget(budgetPublicId: string) {
 
   return budget;
 }
+
+export async function getLatestBudget() {
+  const user = await currentUser();
+
+  const budget = await db.query.budgets.findFirst({
+    where: (budgets, { eq }) => eq(budgets.userId, user.id),
+    orderBy: (budgets, { desc }) => [desc(budgets.createdAt)],
+  });
+
+  if (!budget) throw new Error("No budget found");
+
+  return budget;
+}

@@ -155,6 +155,7 @@ export const categoriesRelations = relations(categories, ({ one, many }) => ({
     references: [categoryGroups.id],
   }),
   transactions: many(transactions),
+  categoryFunds: many(categoryFunds),
 }));
 
 export const categoryFunds = mysqlTable(
@@ -163,6 +164,7 @@ export const categoryFunds = mysqlTable(
     id: bigint("id", { mode: "number" }).primaryKey().autoincrement(),
     publicId: varchar("public_id", { length: 24 }).notNull(),
     categoryId: int("category_id").notNull(),
+    budgetId: int("budget_id").notNull(),
     amount: int("amount"),
     month: int("month"),
     year: int("year"),
@@ -182,6 +184,10 @@ export const categoryFunds = mysqlTable(
 export type CategoryFunds = InferSelectModel<typeof categoryFunds>;
 
 export const categoryFundsRelations = relations(categoryFunds, ({ one }) => ({
+  budget: one(budgets, {
+    fields: [categoryFunds.budgetId],
+    references: [budgets.id],
+  }),
   category: one(categories, {
     fields: [categoryFunds.categoryId],
     references: [categories.id],
